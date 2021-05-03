@@ -1,0 +1,25 @@
+#!name=Bilibili
+#!desc=Bilibili app removes ads.
+#!system=ios
+
+[Rule]
+// defaultword 搜索框默认填充；square 热搜
+// URL-REGEX,https://app.bilibili.com/x/v2/search/(defaultword|square),REJECT
+
+// 开屏广告
+URL-REGEX, ^https://app\.bilibili\.com/x/v2/splash/list, REJECT
+
+[Script]
+// 整体栏的布局修改(包括“首页”右上角、下边 tab 等)
+http-response ^https://app\.bilibili\.com/x/resource/show/tab\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/bilibili/bilibili_tab.js
+
+// “首页”的推荐
+http-response ^https://app\.bilibili\.com/x/v2/feed/index\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/bilibili/bilibili_feed.js
+
+// “我的”的修改
+http-response ^https://app\.bilibili\.com/x/v2/account/mine\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/bilibili/bilibili_mine.js
+
+// http-response ^https://api\.bilibili\.com/x/v2/reply/main 在 app 改为了 https://app.bilibili.com/bilibili.main.community.reply.v1.Reply/MainList 评论区
+
+[MITM]
+hostname = %APPEND% app.bilibili.com
