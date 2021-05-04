@@ -49,4 +49,4 @@ def find_files(orig_root: str, new_root: str, directories: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    find_files('dev', 'scripts', ['bilibili', 'zhihu'])
+    find_files('dev', 'scripts', ['bilibili', 'zhihu', 'youtube'])
