@@ -163,6 +163,6 @@ const main = async() => {
     body = JSON.stringify(body);
     $done({ body });
     // END
-}
+};
 
 main().then();
