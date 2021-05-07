@@ -28,6 +28,8 @@ def rewrite_js_file(orig_path: str, new_path: str) -> None:
         for line in lines[index_start+1: index_end]:
             f.write(line[indent:])  # 去除缩进
 
+    print(f'DONE: {orig_path} -> {new_path}')
+
 
 def find_files(orig_root: str, new_root: str, directories: list[str]) -> None:
     """
@@ -42,8 +44,8 @@ def find_files(orig_root: str, new_root: str, directories: list[str]) -> None:
         new_directory_path = os.path.join(new_root, directory)
         os.makedirs(new_directory_path, exist_ok=True)  # Recursive directory creation function. Like mkdir(), but makes all intermediate-level directories needed to contain the leaf directory.
         for name in os.listdir(orig_directory_path):
-            if not os.path.isdir(name):  # js 文件名
-                orig_path = os.path.join(orig_directory_path, name)
+            orig_path = os.path.join(orig_directory_path, name)
+            if os.path.isfile(orig_path):  # js 文件名
                 new_path = os.path.join(new_directory_path, name)
                 rewrite_js_file(orig_path, new_path)
 
