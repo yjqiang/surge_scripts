@@ -34,7 +34,7 @@ def rewrite_js_file(orig_path: str, new_path: str) -> None:
 def find_files(orig_root: str, new_root: str, directories: list[str]) -> None:
     """
 
-    :param orig_root: 原始 js js 的文件夹隶属于哪个目录
+    :param orig_root: 原始 js 的文件夹隶属于哪个目录
     :param new_root: 处理后的 js 的文件夹隶属于哪个目录
     :param directories: 哪个文件夹（原始 js 和处理后的 js 的文件夹一致的）
     :return:
