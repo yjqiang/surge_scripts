@@ -3,5 +3,11 @@
 .idea/
 node_modules/
 package-lock.json
+__pycache__
 dev/private/
+
+# ts 的编译文件
 runtime/**/*.js
+
+requests_and_responses/requests/curls/**/*.txt
+requests_and_responses/requests/jsons/**/*.json
