@@ -4,7 +4,7 @@ const { read_text_file } = require("../../runtime/utils");
 // 某问题页面
 const main = async() => {
     let $response = {
-        body: read_text_file('../private/zhihu_question_answers1.json')
+        body: read_text_file('../../requests_and_responses/responses/private/zhihu_question_answers1.json')
     };
 
     // START

@@ -4,7 +4,7 @@ const { read_text_file } = require("../../runtime/utils");
 // 首页 -> 关注
 const main = async() => {
     let $response = {
-        body: read_text_file('../private/zhihu_moments_recommend.json')
+        body: read_text_file('../../requests_and_responses/responses/private/zhihu_moments_recommend.json')
     };
 
     // START

@@ -1,5 +1,6 @@
 import re
-import os
+
+import utils
 
           
 START_PATTERN = re.compile(r'^\s*//\s*START\s*$')
@@ -31,24 +32,5 @@ def rewrite_js_file(orig_path: str, new_path: str) -> None:
     print(f'DONE: {orig_path} -> {new_path}')
 
 
-def find_files(orig_root: str, new_root: str, directories: list[str]) -> None:
-    """
-
-    :param orig_root: 原始 js 的文件夹隶属于哪个目录
-    :param new_root: 处理后的 js 的文件夹隶属于哪个目录
-    :param directories: 哪个文件夹（原始 js 和处理后的 js 的文件夹一致的）
-    :return:
-    """
-    for directory in directories:
-        orig_directory_path = os.path.join(orig_root, directory)
-        new_directory_path = os.path.join(new_root, directory)
-        os.makedirs(new_directory_path, exist_ok=True)  # Recursive directory creation function. Like mkdir(), but makes all intermediate-level directories needed to contain the leaf directory.
-        for name in os.listdir(orig_directory_path):
-            orig_path = os.path.join(orig_directory_path, name)
-            if os.path.isfile(orig_path):  # js 文件名
-                new_path = os.path.join(new_directory_path, name)
-                rewrite_js_file(orig_path, new_path)
-
-
 if __name__ == "__main__":
-    find_files('dev', 'scripts', ['bilibili', 'zhihu', 'youtube'])
+    utils.find_files('dev', 'scripts', restrict_orig_file_type='js', new_file_type='js', handler=rewrite_js_file, exception_directory_names=['test'])
