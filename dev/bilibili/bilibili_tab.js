@@ -1,12 +1,15 @@
 const { $done } = require("../../runtime/surge/public");
-const { async_request } = require("../../runtime/utils");
+const { async_request, read_request_json_file } = require("../../runtime/utils");
 
 // 整体栏的布局修改(包括“首页”右上角、下边 tab 等)
 const main = async() => {
-    let $request = {
-        url: "https://app.bilibili.com/x/resource/show/tab?build=1"
-    };
-    let $response = await async_request('get', $request.url);
+    let request = read_request_json_file('../../requests_and_responses/requests/jsons/bilibili/bilibili_tab.json');
+    console.log(request);
+
+    let $response = await async_request(request.method, request.url, request.data, request.headers);
+
+    console.log($response.body);
+
 
     // START
     let body = $response.body;

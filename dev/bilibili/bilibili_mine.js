@@ -1,11 +1,14 @@
 const { $done } = require("../../runtime/surge/public");
-const { read_text_file } = require("../../runtime/utils");
+const { async_request, read_request_json_file } = require("../../runtime/utils");
 
 // “我的”的修改
 const main = async() => {
-    let $response = {
-        body: read_text_file('../private/bilibili_mine.json')
-    };
+    let request = read_request_json_file('../../requests_and_responses/requests/jsons/bilibili/bilibili_mine.json');
+    console.log(request);
+
+    let $response = await async_request(request.method, request.url, request.data, request.headers);
+
+    console.log($response.body);
 
     // START
     let body = $response.body;
