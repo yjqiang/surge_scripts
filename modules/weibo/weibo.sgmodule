@@ -13,5 +13,10 @@ http-response ^https://api\.weibo\.cn/2/statuses/(unread_hot_timeline)|(friends/
 // 发现 热点
 http-response ^https://api\.weibo\.cn/2/cardlist\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/weibo/weibo_cardlist.js
 
+// 每条微博下面 创作者广告共享计划
+http-response ^https://api\.weibo\.cn/2/statuses/extend\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/weibo/weibo_statuses_extends.js
+
+
+
 [MITM]
 hostname = %APPEND% api.weibo.cn
