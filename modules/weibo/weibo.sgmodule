@@ -8,7 +8,7 @@ http-response ^https://api\.weibo\.cn/2/comments/build_comments\? requires-body=
 
 // 微博 推荐 热门/榜单/放映厅… https://api.weibo.cn/2/statuses/unread_hot_timeline?
 // 微博 最新微博 https://api.weibo.cn/2/statuses/friends/timeline?
-http-response ^https://api\.weibo\.cn/2/statuses/(unread_hot_timeline)|(friends/timeline)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/weibo/weibo_statuses.js
+http-response ^https://api\.weibo\.cn/2/statuses/(unread_hot_timeline)|(friends/timeline)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/weibo/weibo_statuse.js
 
 // 发现 热点
 http-response ^https://api\.weibo\.cn/2/cardlist\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/weibo/weibo_cardlist.js
