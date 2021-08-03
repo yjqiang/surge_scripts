@@ -1,8 +1,0 @@
-#!name=YouTube
-#!desc=YouTube videos removes ads.
-
-[Script]
-http-request ^https://[^.]+\.googlevideo\.com/.+&ctier=[^A]& script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/master/scripts/youtube/youtube.js
-
-[MITM]
-hostname = %APPEND% *.googlevideo.com
