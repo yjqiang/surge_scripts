@@ -3,7 +3,7 @@
 #!system=ios
 
 [Script]
-http-response ^https://pan\.baidu\.com/rest/\d\.\d/membership/user\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/baidu/baidu_yunpan.js
+http-response ^https?://pan\.baidu\.com/rest/\d\.\d/membership/user\?.+&firstlaunchtime=\d+ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/baidu/baidu_yunpan.js
 
 [MITM]
 hostname = %APPEND% pan.baidu.com
