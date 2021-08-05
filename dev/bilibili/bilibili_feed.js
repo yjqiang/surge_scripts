@@ -1,5 +1,5 @@
-const { $done } = require("../../runtime/surge/public");
-const { async_request, read_request_json_file } = require("../../runtime/utils");
+import { $done } from "../../runtime/surge/public.js"
+import { async_request, read_request_json_file } from "../../runtime/utils.js"
 
 // “首页”的推荐
 const main = async() => {

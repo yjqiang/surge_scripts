@@ -1,5 +1,5 @@
-const { $done } = require("../../runtime/surge/public");
-const { read_text_file } = require("../../runtime/utils");
+import { $done } from "../../runtime/surge/public.js"
+import { read_text_file } from "../../runtime/utils.js"
 
 // 首页 -> 关注
 const main = async() => {

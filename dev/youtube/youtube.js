@@ -1,4 +1,4 @@
-const { $done } = require("../../runtime/surge/public");
+import { $done } from "../../runtime/surge/public.js"
 
 // 视频广告
 const main = async() => {

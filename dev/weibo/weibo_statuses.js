@@ -1,5 +1,5 @@
-const { $done } = require("../../runtime/surge/public");
-const { async_request, read_request_json_file } = require("../../runtime/utils");
+import { $done } from "../../runtime/surge/public.js"
+import { async_request, read_request_json_file } from "../../runtime/utils.js"
 
 const main = async() => {
     let request = read_request_json_file('../../requests_and_responses/requests/jsons/weibo/weibo_video_tiny_stream_video_list.json');

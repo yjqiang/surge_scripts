@@ -1,4 +1,4 @@
-const { async_request, read_request_json_file } = require("../../runtime/utils");
+import { async_request, read_request_json_file } from "../../runtime/utils.js"
 
 const main = async() => {
     let request = read_request_json_file('../../requests_and_responses/requests/jsons/test/test.json.example');
