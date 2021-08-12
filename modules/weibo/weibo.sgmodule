@@ -2,6 +2,10 @@
 #!desc=Weibo app removes ad.
 #!system=ios
 
+[Rule]
+// 微博 最新微博（下拉刷新，第三个必出广告）
+DOMAIN,ad.us.sinaimg.cn,REJECT
+
 [Script]
 // 微博下面的评论
 http-response ^https://api\.weibo\.cn/2/comments/build_comments\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_comment.js
