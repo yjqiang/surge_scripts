@@ -9,12 +9,10 @@ const main = async() => {
     let $response = await async_request('get', $request.url);
 
     // START
-    let body = $response.body;
-    body=JSON.parse(body);
+    let body = JSON.parse($response.body);
     body['paging']['totals'] = 0;
     body['data'] = [];
-    body=JSON.stringify(body);
-    $done({body});
+    $done({body: JSON.stringify(body)});
     // END
 };
 

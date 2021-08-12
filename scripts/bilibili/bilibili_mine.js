@@ -1,5 +1,4 @@
-let body = $response.body;
-body = JSON.parse(body);
+let body = JSON.parse($response.body);
 // 删除了“推荐服务”
 body['data']['sections_v2'] = [
     {
@@ -148,5 +147,4 @@ body['data']['sections_v2'] = [
         "button": {}
     }
 ];
-body = JSON.stringify(body);
-$done({ body });
+$done({body: JSON.stringify(body)});
