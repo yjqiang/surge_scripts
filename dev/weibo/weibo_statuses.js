@@ -15,6 +15,11 @@ const main = async() => {
     // promotion_info <=> timestamp_text: '推荐内容'
     body['statuses'] = body['statuses'].filter(element => !(element.hasOwnProperty('promotion') || element.hasOwnProperty('promotion_info')));
 
+    // https://api.weibo.cn/2/statuses/friends/timeline
+    if (body['advertises']) body['advertises'] = [];
+    if (body['ad']) body['ad'] = [];
+    if (body['trends']) body['trends'] = [];
+
     $done({body: JSON.stringify(body)});
     // END
 };
