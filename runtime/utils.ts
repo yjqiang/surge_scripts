@@ -1,5 +1,5 @@
 import got, {Method, ResponseType} from "got";
-import * as fs from 'fs';
+import {readFileSync} from 'fs';
 import {Headers} from "got/dist/source/core";
 
 const async_request = async (method: Method, url: string, body: any=null, headers: Headers={}): Promise<{ body: string; status: number; headers: object }> => {
@@ -41,12 +41,12 @@ const async_request = async (method: Method, url: string, body: any=null, header
     }
 };
 
+const read_text_file = (path: string): string =>
+    readFileSync(path, {encoding: 'utf8'});
 
 const read_json_file = (path: string): any =>
-    JSON.parse(fs.readFileSync(path, {encoding: 'utf8'}));
+    JSON.parse(read_text_file(path));
 
-const read_text_file = (path: string): any =>
-    fs.readFileSync(path, {encoding: 'utf8'});
 
 const read_request_json_file = (path: string): { url: string; method: Method; data: any; headers: Headers } =>{
     let request = read_json_file(path);
