@@ -9,7 +9,8 @@ http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/comments/build_commen
 // 微博 推荐 热门/榜单/放映厅… https://api.weibo.cn/2/statuses/unread_hot_timeline?
 // 微博 最新微博 https://api.weibo.cn/2/statuses/friends/timeline?
 // 视频流（短视频上划，微博继续推荐新视频） https://api.weibo.cn/2/video/tiny_stream_video_list?
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(statuses/unread_hot_timeline|statuses/friends/timeline|video/tiny_stream_video_list)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_statuses.js
+// 超话 帖子/精华/官方 https://api.weibo.cn/2/page?
+http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(statuses/unread_hot_timeline|statuses/friends/timeline|video/tiny_stream_video_list|page)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_statuses.js
 
 // 发现 热点 https://api.weibo.cn/2/cardlist?
 // 发现 搜索 https://api.weibo.cn/2/searchall?
