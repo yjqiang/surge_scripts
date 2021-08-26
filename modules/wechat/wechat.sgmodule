@@ -1,0 +1,10 @@
+#!name=Wechat
+#!desc=Wechat app removes ads.
+#!system=ios
+
+[Rule]
+// 公众号文章底部广告 https://mp.weixin.qq.com/mp/getappmsgad?f=json&
+http-response ^https://mp\.weixin\.qq\.com/mp/getappmsgad\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/wechat/wechat_public_accounts.js
+
+[MITM]
+hostname = %APPEND% mp.weixin.qq.com
