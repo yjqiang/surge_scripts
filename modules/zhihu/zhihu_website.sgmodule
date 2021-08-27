@@ -4,7 +4,11 @@
 [Rule]
 # https://www.v2ex.com/t/730727
 # eg: https://static.zhihu.com/heifetz/main.signflow.8981b23e28b3de684698.js
-URL-REGEX, ^https://static\.zhihu\.com/[^/]+/main\.signflow\.[^.]+.js, REJECT
+
+# https://www.v2ex.com/t/784612
+# eg: https://static.zhihu.com/heifetz/column.signflow.288f3addd8e584a7bca6.js
+URL-REGEX, ^https://static\.zhihu\.com/[^/]+/(main|column)\.signflow\.[^.]+.js, REJECT
+
 
 [MITM]
 hostname = %APPEND% static.zhihu.com
