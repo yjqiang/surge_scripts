@@ -1,6 +1,8 @@
 import got, {Method, ResponseType} from "got";
-import {readFileSync} from 'fs';
+import {readdirSync as fsReaddirSync, readFileSync as fsReadFileSync, statSync as fsStatSync} from 'fs';
 import {Headers} from "got/dist/source/core";
+import {extname as pathExtname, join as pathJoin} from "path";
+import {strict as assert} from "assert";
 
 const async_request = async (method: Method, url: string, body: any=null, headers: Headers={}): Promise<{ body: string; status: number; headers: object }> => {
     let rsp;
@@ -42,7 +44,7 @@ const async_request = async (method: Method, url: string, body: any=null, header
 };
 
 const read_text_file = (path: string): string =>
-    readFileSync(path, {encoding: 'utf8'});
+    fsReadFileSync(path, {encoding: 'utf8'});
 
 const read_json_file = (path: string): any =>
     JSON.parse(read_text_file(path));
@@ -70,7 +72,29 @@ const read_request_json_file = (path: string): { url: string; method: Method; da
         data: <any> request['data'],
         headers: <Headers> request['headers'],
     }
-}
+};
 
+/**
+ * 查找每个文件 orig_root/directory_name/file_name
+ * @param orig_root
+ */
+const find_files = function (orig_root: string): Array<string>{
+    let result: Array<string> = [];
+    for (let directory_name of fsReaddirSync(orig_root)){
+        let directory_path = pathJoin(orig_root, directory_name);
+        assert.equal(fsStatSync(directory_path).isDirectory(), true);  // 是个存在的文件夹
 
-export { async_request, read_json_file, read_text_file, read_request_json_file};
+        for (let file_name of fsReaddirSync(directory_path)){
+            let file_path = pathJoin(directory_path, file_name)
+
+            assert.equal(fsStatSync(file_path).isFile(), true); // 是个存在的文件
+            assert.equal(pathExtname(file_path), '.sgmodule');
+
+            result.push(file_path);
+        }
+
+    }
+    return result;
+};
+
+export { async_request, read_json_file, read_text_file, read_request_json_file, find_files};
