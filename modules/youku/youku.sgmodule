@@ -1,0 +1,6 @@
+#!name=Youku
+#!desc=Youku app removes ads.
+
+[Rule]
+# 视频的暂停广告
+DOMAIN, iyes.youku.com, REJECT
