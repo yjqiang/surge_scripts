@@ -37,8 +37,7 @@ def find_files(orig_root: str, new_root: str, handler: Callable[[str, str], None
             orig_file_path = os.path.join(orig_directory_path, orig_file_name)
             split_file_name = orig_file_name.split('.')
             assert os.path.isfile(orig_file_path)  # 是个存在的文件
-            assert split_file_name[1] == restrict_orig_file_type
-
-            split_file_name[1] = new_file_type
-            new_file_path = os.path.join(new_directory_path, '.'.join(split_file_name))
-            handler(orig_file_path, new_file_path)
+            if split_file_name[1] == restrict_orig_file_type:
+                split_file_name[1] = new_file_type
+                new_file_path = os.path.join(new_directory_path, '.'.join(split_file_name))
+                handler(orig_file_path, new_file_path)
