@@ -11,3 +11,4 @@ runtime/**/*.js
 requests_and_responses/requests/curls/**/*.txt
 requests_and_responses/requests/jsons/**/*.json
 requests_and_responses/responses/**/*.json
+requests_and_responses/responses/**/*.x
