@@ -14,7 +14,7 @@ http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(statuses/unread_hot_
 
 // 发现 搜索 https://api.weibo.cn/2/searchall?
 // 超话 帖子/精华/官方 https://api.weibo.cn/2/page?
-http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(cardlist|searchall|page)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_cardlist.js
+http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/(searchall|page)\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_cardlist.js
 
 // 发现 热点（这货特殊，有卡片广告） https://api.weibo.cn/2/cardlist?
 http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/cardlist\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_cardlist_discover.js
