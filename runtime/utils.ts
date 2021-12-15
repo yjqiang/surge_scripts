@@ -1,6 +1,6 @@
 import got, {Method, ResponseType} from "got";
 import {readdirSync as fsReaddirSync, readFileSync as fsReadFileSync, statSync as fsStatSync} from 'fs';
-import {Headers} from "got/dist/source/core";
+import {Headers} from "got/dist/source/core/options";
 import {extname as pathExtname, join as pathJoin} from "path";
 import {strict as assert} from "assert";
 
