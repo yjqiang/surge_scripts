@@ -10,7 +10,8 @@
 URL-REGEX, ^https://app\.bilibili\.com/x/v2/splash/list, REJECT
 
 // 搭配 protobuf 的（否则抓不到。。。）
-DOMAIN-SUFFIX, grpc.biliapi.net, REJECT
+// REJECT-NO-DROP 表示不使用默认的自动丢包逻辑，这样 Surge 每次都会返回 ICMP Port Unreachable，应用会立刻回退而不是等超时。
+DOMAIN-SUFFIX, grpc.biliapi.net, REJECT-NO-DROP
 
 [Script]
 // 整体栏的布局修改(包括“首页”右上角、下边 tab 等)
