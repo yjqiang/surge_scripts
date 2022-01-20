@@ -1,7 +1,15 @@
 import got, {Method, ResponseType} from "got";
-import {readdirSync as fsReaddirSync, readFileSync as fsReadFileSync, statSync as fsStatSync} from 'fs';
+import {
+    readdirSync as fsReaddirSync,
+    readFileSync as fsReadFileSync,
+    statSync as fsStatSync,
+    rmSync as fsRmSync,
+    mkdirSync as fsMkdirSync,
+    existsSync as fsExistsSync} from 'fs';
 import {Headers} from "got/dist/source/core/options";
-import {extname as pathExtname, join as pathJoin} from "path";
+import {
+    extname as pathExtname,
+    join as pathJoin, basename as pathBasename} from "path";
 import {strict as assert} from "assert";
 
 const async_request = async (method: Method, url: string, body: any=null, headers: Headers={}): Promise<{ body: string; status: number; headers: object }> => {
@@ -77,8 +85,9 @@ const read_request_json_file = (path: string): { url: string; method: Method; da
 /**
  * 查找每个文件 orig_root/directory_name/file_name
  * @param orig_root
+ * @param restrict_orig_file_type 限制 file 后缀
  */
-const find_files = function (orig_root: string): Array<string>{
+const find_files = function (orig_root: string, restrict_orig_file_type: string): Array<string>{
     let result: Array<string> = [];
     for (let directory_name of fsReaddirSync(orig_root)){
         let directory_path = pathJoin(orig_root, directory_name);
@@ -88,13 +97,53 @@ const find_files = function (orig_root: string): Array<string>{
             let file_path = pathJoin(directory_path, file_name)
 
             assert.equal(fsStatSync(file_path).isFile(), true); // 是个存在的文件
-            assert.equal(pathExtname(file_path), '.sgmodule');
-
-            result.push(file_path);
+            if (pathExtname(file_path) === restrict_orig_file_type)
+                result.push(file_path);
         }
 
     }
     return result;
 };
 
-export { async_request, read_json_file, read_text_file, read_request_json_file, find_files};
+/**
+ * 每个文件都处理后保存到新位置 orig_root/directory_name/file_name -- 处理文件 --> new_root/directory_name/file_name
+ * 原始和处理后文件夹一致的
+ * @param orig_root 原始文件夹隶属于哪个目录
+ * @param new_root 处理后文件夹隶属于哪个目录
+ * @param handler
+ * @param restrict_orig_file_type 限制 file 后缀
+ * @param new_file_type
+ * @param exception_directory_names
+ */
+const handler_files = function (orig_root: string, new_root: string, handler: Function, restrict_orig_file_type: string, new_file_type: string, exception_directory_names: null | Array<string> = null): void{
+    if (exception_directory_names === null)
+        exception_directory_names = []
+
+    for (let directory_name of fsReaddirSync(orig_root)){
+        let orig_directory_path = pathJoin(orig_root, directory_name);
+        assert.equal(fsStatSync(orig_directory_path).isDirectory(), true);  // 是个存在的文件夹
+
+        if (exception_directory_names.includes(directory_name))
+            continue
+
+        let new_directory_path = pathJoin(new_root, directory_name);
+
+        // 如果没有 new_directory_path，就创建一个出来；否则确保此文件夹内数据清空
+        if (fsExistsSync(new_directory_path) && fsStatSync(new_directory_path).isDirectory())
+            fsRmSync(new_directory_path, {recursive: true});
+        fsMkdirSync(new_directory_path);
+
+        for (let orig_file_name of fsReaddirSync(orig_directory_path)){
+            let orig_file_path = pathJoin(orig_directory_path, orig_file_name);
+            assert.equal(fsStatSync(orig_file_path).isFile(), true); // 是个存在的文件
+
+            if (pathExtname(orig_file_name) === restrict_orig_file_type) {
+                const basename = pathBasename(orig_file_name, restrict_orig_file_type);
+                let new_file_path = pathJoin(new_directory_path, basename + new_file_type);
+                handler(orig_file_path, new_file_path);
+            }
+        }
+    }
+};
+
+export { async_request, read_json_file, read_text_file, read_request_json_file, find_files, handler_files};
