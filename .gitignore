@@ -7,6 +7,7 @@ __pycache__
 
 # ts 的编译文件
 runtime/**/*.js
+convert_dev2scripts.js
 
 requests_and_responses/requests/curls/**/*.txt
 requests_and_responses/requests/jsons/**/*.json
