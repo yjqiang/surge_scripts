@@ -1,7 +1,7 @@
 // null / object
 const $done = (data: any = null): void => {
     console.log("$done:");
-    if (data == null)
+    if (data === null)
         console.log();
     else if (Object.keys(data).length === 0)
         console.log("->", "KEEP_UNTOUCHED");

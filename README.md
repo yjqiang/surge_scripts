@@ -9,7 +9,7 @@
 
    
 ## CURL 测试
-1. [convert_surge_curl2json.py](convert_surge_curl2json.py) 可以把 [requests_and_responses/requests/curls](requests_and_responses/requests/curls) 里面 `curl` 文件转为 [requests_and_responses/requests/jsons](requests_and_responses/requests/jsons) 里面的 `json` 文件
+1. [convert_surge_curl2json.ts](convert_surge_curl2json.ts) 可以把 [requests_and_responses/requests/curls](requests_and_responses/requests/curls) 里面 `curl` 文件转为 [requests_and_responses/requests/jsons](requests_and_responses/requests/jsons) 里面的 `json` 文件
 1. 通过 [runtime/utils.ts](runtime/utils.ts) 的 `read_request_json_file` 函数可以读取此 `json` 文件，生成**请求所需要的数据**；再用 `async_request` 函数**模拟请求**
 1. 例如 [dev/test/test.js](dev/test/test.js)
 

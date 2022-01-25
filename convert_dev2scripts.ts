@@ -1,7 +1,9 @@
 import {writeFileSync} from 'fs';
-import {handler_files, read_text_file} from "./runtime/utils.js"
 import {EOL as osEOL} from "os";
-          
+
+import {handler_files, read_text_file} from "./runtime/utils.js"
+
+
 const START_PATTERN = /^\s*\/\/\s*START\s*$/;
 const END_PATTERN = /^\s*\/\/\s*END\s*$/;
 
@@ -37,4 +39,6 @@ function rewrite_js_file(orig_path: string, new_path: string): void{
 
     console.log(`DONE: ${orig_path} -> ${new_path}`);
 }
-handler_files('dev', 'scripts', rewrite_js_file, '.js', '.js', ['test']);
+
+
+handler_files('dev', 'scripts', rewrite_js_file, 'js', 'js', ['test']);

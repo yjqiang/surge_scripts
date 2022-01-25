@@ -5,12 +5,14 @@ import {
     statSync as fsStatSync,
     rmSync as fsRmSync,
     mkdirSync as fsMkdirSync,
-    existsSync as fsExistsSync} from 'fs';
+    existsSync as fsExistsSync, writeFileSync
+} from 'fs';
 import {Headers} from "got/dist/source/core/options";
 import {
     extname as pathExtname,
-    join as pathJoin, basename as pathBasename} from "path";
+    join as pathJoin} from "path";
 import {strict as assert} from "assert";
+import {EOL as osEOL} from "os";
 
 const async_request = async (method: Method, url: string, body: any=null, headers: Headers={}): Promise<{ body: string; status: number; headers: object }> => {
     let rsp;
@@ -56,6 +58,12 @@ const read_text_file = (path: string): string =>
 
 const read_json_file = (path: string): any =>
     JSON.parse(read_text_file(path));
+
+const write_json_file = (path: string, data: any): void => {
+    let lines = JSON.stringify(data, null, 4).split(/\r?\n/);  // https://stackoverflow.com/a/21895354
+
+    writeFileSync(path, lines.join(osEOL));
+}
 
 
 const read_request_json_file = (path: string): { url: string; method: Method; data: any; headers: Headers } =>{
@@ -137,13 +145,14 @@ const handler_files = function (orig_root: string, new_root: string, handler: Fu
             let orig_file_path = pathJoin(orig_directory_path, orig_file_name);
             assert.equal(fsStatSync(orig_file_path).isFile(), true); // 是个存在的文件
 
-            if (pathExtname(orig_file_name) === restrict_orig_file_type) {
-                const basename = pathBasename(orig_file_name, restrict_orig_file_type);
-                let new_file_path = pathJoin(new_directory_path, basename + new_file_type);
+            let split_file_name = orig_file_name.split('.');
+            if (split_file_name[1] === restrict_orig_file_type) {
+                split_file_name[1] = new_file_type;
+                let new_file_path = pathJoin(new_directory_path, split_file_name.join('.'));
                 handler(orig_file_path, new_file_path);
             }
         }
     }
 };
 
-export { async_request, read_json_file, read_text_file, read_request_json_file, find_files, handler_files};
+export { async_request, read_json_file, write_json_file, read_text_file, read_request_json_file, find_files, handler_files};
