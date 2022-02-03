@@ -29,6 +29,8 @@ http-response ^https://app\.bilibili\.com/x/v2/account/mine\?access_key requires
 // 动态广告
 http-response ^https://app\.bilibili\.com/bilibili\.app\.dynamic\.v2\.Dynamic/DynAll$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_dynamic.js
 
+// 播放器广告
+http-response ^https://app\.bilibili\.com/bilibili\.app\.view\.v1\.View/View$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_view.js
 
 [MITM]
 hostname = %APPEND% app.bilibili.com
