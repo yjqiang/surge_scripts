@@ -6,9 +6,6 @@
 // defaultword 搜索框默认填充；square 热搜
 // URL-REGEX,https://app.bilibili.com/x/v2/search/(defaultword|square),REJECT
 
-// 开屏广告
-URL-REGEX, ^https://app\.bilibili\.com/x/v2/splash/list, REJECT
-
 // 搭配 protobuf 的（否则抓不到。。。）
 // REJECT-NO-DROP 表示不使用默认的自动丢包逻辑，这样 Surge 每次都会返回 ICMP Port Unreachable，应用会立刻回退而不是等超时。
 DOMAIN-SUFFIX, grpc.biliapi.net, REJECT-NO-DROP
@@ -31,6 +28,10 @@ http-response ^https://app\.bilibili\.com/bilibili\.app\.dynamic\.v2\.Dynamic/Dy
 
 // 播放器广告
 http-response ^https://app\.bilibili\.com/bilibili\.app\.view\.v1\.View/View$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_view.js
+
+// 开屏广告（预加载）
+// https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_plus.js
+http-response ^https://app\.bilibili\.com/x/v2/splash/list requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_splash.js
 
 [MITM]
 hostname = %APPEND% app.bilibili.com
