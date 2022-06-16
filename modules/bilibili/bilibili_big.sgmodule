@@ -18,6 +18,10 @@ http-response ^https://app\.bilibili\.com/x/resource/show/tab(/v2)?\?access_key 
 // 短视频的推荐 https://app.bilibili.com/x/v2/feed/index/story?
 http-response ^https://app\.bilibili\.com/x/v2/feed/index(/story)?\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_feed.js
 
+
+// 短视频的推荐 https://app.biliapi.net/x/v2/feed/index/story?
+http-response ^https://app\.biliapi\.net/x/v2/feed/index/story\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_feed.js
+
 // “我的”的修改
 http-response ^https://app\.bilibili\.com/x/v2/account/mine\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_mine.js
 
@@ -34,4 +38,4 @@ http-response ^https://app\.bilibili\.com/bilibili\.app\.view\.v1\.View/View$ re
 http-response ^https://app\.bilibili\.com/x/v2/splash/list requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_splash.js
 
 [MITM]
-hostname = %APPEND% app.bilibili.com
+hostname = %APPEND% app.bilibili.com, app.biliapi.net
