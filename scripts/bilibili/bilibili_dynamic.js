@@ -26,6 +26,6 @@ let gzip_data = gzipSync(data, {level: 0, mtime: 0});  // 速度最快；Uint8Ar
 // 校验
 let gzip_data_len = gzip_data.length;
 let new_body = new Uint8Array(5 + gzip_data_len);
-new_body.set(Uint8Array.from([...body.slice(0, 2), (gzip_data_len>>16)&0xff, (gzip_data_len >> 8)&0xff, gzip_data_len&0xff]), 0);
+new_body.set(Uint8Array.from([...body.slice(0, 1), (gzip_data_len >> 24)&0xff, (gzip_data_len >> 16)&0xff, (gzip_data_len >> 8)&0xff, gzip_data_len&0xff]), 0);
 new_body.set(gzip_data, 5);
 $done({body: new_body});
