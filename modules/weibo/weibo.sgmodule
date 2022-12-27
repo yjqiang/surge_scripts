@@ -25,5 +25,8 @@ http-response ^https://(api\.weibo\.cn|mapi\.weibo\.com)/2/statuses/extend\? req
 // 开屏广告
 http-response ^https://sdkapp\.uve\.weibo\.com/interface/sdk/sdkad\.php$ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_sdkad.js
 
+// 微博 最新微博 https://api.weibo.cn/2/statuses/container_timeline?
+http-response ^https://api\.weibo\.cn/2/statuses/container_timeline\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_comment.js
+
 [MITM]
 hostname = %APPEND% api.weibo.cn, mapi.weibo.com, sdkapp.uve.weibo.com
