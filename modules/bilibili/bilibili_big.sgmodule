@@ -8,7 +8,7 @@
 
 // 搭配 protobuf 的（否则抓不到。。。）
 // REJECT-NO-DROP 表示不使用默认的自动丢包逻辑，这样 Surge 每次都会返回 ICMP Port Unreachable，应用会立刻回退而不是等超时。
-DOMAIN-SUFFIX, grpc.biliapi.net, REJECT-NO-DROP
+// DOMAIN-SUFFIX, grpc.biliapi.net, REJECT-NO-DROP
 
 [Script]
 // 整体栏的布局修改(包括“首页”右上角、下边 tab 等)
@@ -18,24 +18,20 @@ http-response ^https://app\.bilibili\.com/x/resource/show/tab(/v2)?\?access_key 
 // 短视频的推荐 https://app.bilibili.com/x/v2/feed/index/story?
 http-response ^https://app\.bilibili\.com/x/v2/feed/index(/story)?\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_feed.js
 
-
-// 短视频的推荐 https://app.biliapi.net/x/v2/feed/index/story?
-http-response ^https://app\.biliapi\.net/x/v2/feed/index/story\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_feed.js
-
 // “我的”的修改
 http-response ^https://app\.bilibili\.com/x/v2/account/mine\?access_key requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_mine.js
 
 // http-response ^https://api\.bilibili\.com/x/v2/reply/main 在 app 改为了 https://app.bilibili.com/bilibili.main.community.reply.v1.Reply/MainList 评论区
 
 // 动态广告
-http-response ^https://app\.bilibili\.com/bilibili\.app\.dynamic\.v2\.Dynamic/DynAll$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_dynamic.js
+http-response ^https://grpc\.biliapi\.net/bilibili\.app\.dynamic\.v2\.Dynamic/DynAll$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_dynamic.js
 
 // 播放器广告
-http-response ^https://app\.bilibili\.com/bilibili\.app\.view\.v1\.View/View$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_view.js
+http-response ^https://grpc\.biliapi\.net/bilibili\.app\.view\.v1\.View/View$ requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_view.js
 
 // 开屏广告（预加载）
 // https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_plus.js
 http-response ^https://app\.bilibili\.com/x/v2/splash/list requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/bilibili/bilibili_splash.js
 
 [MITM]
-hostname = %APPEND% app.bilibili.com, app.biliapi.net
+hostname = %APPEND% app.bilibili.com, app.biliapi.net, grpc.biliapi.net
