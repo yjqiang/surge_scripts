@@ -2,8 +2,12 @@ import { $done } from "../../runtime/surge/public.js"
 import { read_text_file } from "../../runtime/utils.js"
 
 const main = async() => {
+    // let $response = {
+    //     body: read_text_file('../../requests_and_responses/responses/private/weibo_statuses_items.json')
+    // };
+
     let $response = {
-        body: read_text_file('../../requests_and_responses/responses/private/weibo_statuses_items.json')
+        body: read_text_file('../../requests_and_responses/responses/private/weibo_search_container_timeline.json')
     };
 
     // START
