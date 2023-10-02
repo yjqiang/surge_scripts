@@ -24,7 +24,7 @@ const main = async() => {
     let body = $response.body;
 
     // 解压 gzip
-    let data = $utils.ungzip(body.subarray(5));
+    let data = $utils.ungzip(body.slice(5));
 
     // 解码
     let message = ViewReply.fromBinary(data, {readUnknownField: true});
