@@ -29,6 +29,8 @@ http-response ^https://wbapp\.uve\.weibo.com/wbapplua/wbpullad\.lua\? requires-b
 // 微博 最新微博 https://api.weibo.cn/2/statuses/container_timeline?
 // 发现 https://api.weibo.cn/2/search/container_timeline?
 http-response ^https://api\.weibo\.cn/2/(statuses|search)/container_timeline\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_statuses_items.js
+// 发现（第一次不走上面的 api） https://api.weibo.cn/2/search/finder?
+http-response ^https://api\.weibo\.cn/2/search/finder\? requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yjqiang/surge_scripts/main/scripts/weibo/weibo_search_finder.js
 
 [MITM]
 hostname = %APPEND% api.weibo.cn, mapi.weibo.com, sdkapp.uve.weibo.com, wbapp.uve.weibo.com
