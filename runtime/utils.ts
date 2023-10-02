@@ -13,6 +13,7 @@ import {
     join as pathJoin} from "path";
 import {strict as assert} from "assert";
 import {EOL as osEOL} from "os";
+import {gunzipSync as zlib_gunzipSync} from "zlib";
 
 const async_request = async (method: Method, url: string, body: any=null, headers: Headers={}): Promise<{ body: string; status: number; headers: object }> => {
     let rsp;
@@ -155,4 +156,11 @@ const handler_files = function (orig_root: string, new_root: string, handler: Fu
     }
 };
 
-export { async_request, read_json_file, write_json_file, read_text_file, read_request_json_file, find_files, handler_files};
+const $utils = {
+    ungzip: (binary: Uint8Array): Uint8Array => {
+        return zlib_gunzipSync(binary);
+    }
+};
+
+
+export { async_request, read_json_file, write_json_file, read_text_file, read_request_json_file, find_files, handler_files, $utils};
