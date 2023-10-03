@@ -1,4 +1,4 @@
-import { $done } from "../../runtime/surge/public.js"
+import { $done } from "../../runtime/surge/others.js"
 import { async_request, read_request_json_file } from "../../runtime/utils.js"
 
 // 整体栏的布局修改(包括“首页”右上角、下边 tab 等)

@@ -1,4 +1,4 @@
-import { $done } from "../../runtime/surge/public.js"
+import { $done } from "../../runtime/surge/others.js"
 import {readFileSync as fsReadFileSync} from "fs";
 
 

@@ -1,6 +1,6 @@
-import { $done } from "../../runtime/surge/public.js"
+import { $done } from "../../runtime/surge/others.js"
 import {readFileSync as fsReadFileSync} from "fs";
-import {$utils} from "../../runtime/utils.js";
+import {$utils} from "../../runtime/surge/others.js";
 
 
 const main = async() => {

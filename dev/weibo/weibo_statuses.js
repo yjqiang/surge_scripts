@@ -1,4 +1,4 @@
-import { $done } from "../../runtime/surge/public.js"
+import { $done } from "../../runtime/surge/others.js"
 import { async_request, read_request_json_file } from "../../runtime/utils.js"
 
 const main = async() => {

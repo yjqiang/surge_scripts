@@ -1,4 +1,6 @@
 // null / object
+import {gunzipSync as zlib_gunzipSync} from "zlib";
+
 const $done = (data: any = null): void => {
     console.log("$done:");
     if (data === null)
@@ -22,4 +24,11 @@ const $notification = {
     }
 };
 
-export { $done, $notification };
+
+const $utils = {
+    ungzip: (binary: Uint8Array): Uint8Array => {
+        return zlib_gunzipSync(binary);
+    }
+};
+
+export { $done, $notification, $utils};

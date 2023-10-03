@@ -1,4 +1,4 @@
-import { $done } from "../../runtime/surge/public.js"
+import { $done } from "../../runtime/surge/others.js"
 
 // 视频广告
 const main = async() => {

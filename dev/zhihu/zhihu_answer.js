@@ -1,4 +1,4 @@
-import { $done } from "../../runtime/surge/public.js"
+import { $done } from "../../runtime/surge/others.js"
 import { async_request } from "../../runtime/utils.js"
 
 // 回答最下方的广告

@@ -156,11 +156,6 @@ const handler_files = function (orig_root: string, new_root: string, handler: Fu
     }
 };
 
-const $utils = {
-    ungzip: (binary: Uint8Array): Uint8Array => {
-        return zlib_gunzipSync(binary);
-    }
-};
 
 
-export { async_request, read_json_file, write_json_file, read_text_file, read_request_json_file, find_files, handler_files, $utils};
+export { async_request, read_json_file, write_json_file, read_text_file, read_request_json_file, find_files, handler_files};
