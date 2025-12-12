@@ -3,4 +3,8 @@ let body = JSON.parse($response.body);
 // https://github.com/yichahucha/surge/issues/112
 if (body['items'])  // 包括 body['cards'] 可能为 null 的情况
     body['items'] = body['items'].filter(element => !(element.hasOwnProperty('data') && element['data'].hasOwnProperty('mblogtype') && element['data']['mblogtype'] === 1));
+    
+if (body['items'])  
+    body['items'] = body['items'].filter(element => !(element.hasOwnProperty('status') && element['status'].hasOwnProperty('promotion') || element.hasOwnProperty('status') && element['status'].hasOwnProperty('promotion_info'))); 
+ 
 $done({body: JSON.stringify(body)});
